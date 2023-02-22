@@ -4,7 +4,7 @@ public abstract class User extends BaseEntity {
     private String name;
     private String surname;
     private String phone;
-    private String gmail;
+    private String email;
 
     @Override
     public String toString() {
@@ -12,7 +12,7 @@ public abstract class User extends BaseEntity {
                 "name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", phone='" + phone + '\'' +
-                ", gmail='" + gmail + '\'' +
+                ", gmail='" + email + '\'' +
                 '}';
     }
 
@@ -40,11 +40,11 @@ public abstract class User extends BaseEntity {
         this.phone = phone;
     }
 
-    public String getGmail() {
-        return gmail;
+    public String getEmail() {
+        return email;
     }
 
-    public void setGmail(String gmail) {
-        this.gmail = gmail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
