@@ -11,6 +11,7 @@ public class ManagerDaoImpl implements ManagerDao {
 
     private final String PATH_FILE = "C:\\Users\\Rnurd\\IdeaProjects\\Lessons\\crm-mega\\lib\\Manager.txt";
     private final File MANAGER_FILE = new File(PATH_FILE);
+    private int count;
 
     public ManagerDaoImpl() {
         boolean isCreated = false;
@@ -29,9 +30,11 @@ public class ManagerDaoImpl implements ManagerDao {
 
     @Override
     public void save(Manager manager) {
+
+        count = getCount();
         try {
             PrintWriter out = new PrintWriter(new FileOutputStream(PATH_FILE, true));
-            out.print(manager.getId() + " ");
+            out.print(++count + " ");
             out.print(manager.getName() + " ");
             out.print(manager.getSurname() + " ");
             out.print(manager.getEmail() + " ");
@@ -48,8 +51,8 @@ public class ManagerDaoImpl implements ManagerDao {
 
     @Override
     public Manager[] findAll() {
-//        int count = getCount();
-        Manager[] managers = new Manager[100];
+
+        Manager[] managers = new Manager[count];
 
         try {
             Scanner scanner = new Scanner(MANAGER_FILE);
@@ -73,5 +76,21 @@ public class ManagerDaoImpl implements ManagerDao {
 
 
         return managers;
+    }
+
+    private int getCount() {
+        int count = 0;
+        try {
+            Scanner scan = new Scanner(MANAGER_FILE);
+
+            while (scan.hasNextLine()) {
+                count++;
+                scan.nextLine();
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return count;
     }
 }

@@ -1,20 +1,10 @@
 package model;
 
 public abstract class User extends BaseEntity {
-    private String name;
-    private String surname;
-    private String phone;
-    private String email;
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", phone='" + phone + '\'' +
-                ", gmail='" + email + '\'' +
-                '}';
-    }
+    protected String name;
+    protected String surname;
+    protected String phone;
+    protected String email;
 
     public String getName() {
         return name;
