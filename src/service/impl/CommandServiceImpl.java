@@ -1,13 +1,10 @@
 package service.impl;
 
 import dao.CourseFormatDao;
-import dao.impl.CourseFormatDaoImpl;
 import dao.impl.CourseFormatDaoImplV2;
-import enums.Format;
 import model.CourseFormat;
 import service.CommandService;
 
-import java.text.Normalizer;
 import java.util.Arrays;
 
 import static enums.Format.BOOTCAMP;
@@ -15,14 +12,6 @@ import static enums.Format.BOOTCAMP;
 public class CommandServiceImpl implements CommandService {
     @Override
     public void run() {
-
-        Format format = scan.nextLine();
-
-
-        switch (format) {
-            case SAVE:
-                System.out.println();
-        }
 
         /*        Course course = new Course();
         course.setId(1);

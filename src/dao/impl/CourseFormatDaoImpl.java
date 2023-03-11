@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class CourseFormatDaoImpl implements CourseFormatDao {
     private final String PATH_FILE = "C:\\Users\\Rnurd\\IdeaProjects\\Lessons\\crm-mega\\lib\\CourseFormat.txt";
     private final File COURSE_FORMAT_FILE = new File(PATH_FILE);
-    private int count = 0;
+    private int count;
 
     public CourseFormatDaoImpl() {
         boolean isCreated = false;
@@ -31,8 +31,9 @@ public class CourseFormatDaoImpl implements CourseFormatDao {
     public void save(CourseFormat courseFormat) {
         count = getCount();
         System.out.println(count);
+        PrintWriter out = null;
         try {
-            PrintWriter out = new PrintWriter(new FileOutputStream(PATH_FILE, true));
+            out = new PrintWriter(new FileOutputStream(PATH_FILE, true));
             out.print(++count + " ");
             out.print(courseFormat.getFormat() + " ");
             out.print(courseFormat.getDurationInWeek() + " ");
@@ -41,9 +42,11 @@ public class CourseFormatDaoImpl implements CourseFormatDao {
             out.print(courseFormat.getLessonCountPerWeek() + " ");
             out.print(courseFormat.getDateCreated().toString().substring(0, 22));
             out.println();
-            out.close();
-        } catch (FileNotFoundException e) {
+
+        } catch (FileNotFoundException | ArithmeticException e) {
             e.printStackTrace();
+        } finally {
+            close(out);
         }
     }
 
