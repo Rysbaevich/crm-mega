@@ -1,7 +1,5 @@
 import dao.ManagerDao;
-import model.Manager;
-
-import java.util.Scanner;
+import util.Log;
 
 public class Main {
 
@@ -9,18 +7,16 @@ public class Main {
 
     public static void main(String[] args) {
         try {
-//            log.info("Connecting...");
-            System.out.println("Loading driver...");
+            Log.info("Loading driver...", Main.class.getName(), Class.class.getName());
             Class.forName("org.postgresql.Driver");
-            System.out.println("Driver loaded");
-//            log.info("Connection succeed");
+            Log.info("Driver loaded", Main.class.getName(), Class.class.getName());
         } catch (ClassNotFoundException e) {
-            System.err.println("Driver loading failed");
+            Log.error("Loading failed", Main.class.getName(), Class.class.getName());
             e.printStackTrace();
         }
 
         ManagerDao managerDao = ManagerDao.INSTANCE;
-        Manager manager = new Manager();
+        /*Manager manager = new Manager();
         Scanner scanner = new Scanner(System.in);
         System.out.println("Name: ");
         manager.setName(scanner.nextLine());
@@ -36,7 +32,7 @@ public class Main {
 
         System.out.println("Salary: ");
         manager.setSalary(scanner.nextDouble());
-
-        managerDao.save(manager);
+*/
+        System.out.println(managerDao.findById(3L));
     }
 }
