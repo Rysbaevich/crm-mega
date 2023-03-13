@@ -8,6 +8,6 @@ public class Log {
     }
 
     public static void error(String message, String className, String targetName) {
-        System.err.printf("%s [INFO] ----- %s ----- %s ----- %s%n", LocalDateTime.now(), className, targetName, message);
+        System.err.printf("%s [ERROR] ----- %s ----- %s ----- %s%n", LocalDateTime.now(), className, targetName, message);
     }
 }

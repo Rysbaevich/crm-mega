@@ -10,9 +10,10 @@ import java.util.List;
 public class ManagerDaoImplV2 implements ManagerDao {
 
     public ManagerDaoImplV2() {
+        Connection connection = null;
         try {
             System.out.println("Connecting...");
-            Connection connection = getConnection();
+            connection = getConnection();
             System.out.println("Connection succeed");
 
             String ddlQuery =
@@ -32,6 +33,8 @@ public class ManagerDaoImplV2 implements ManagerDao {
         } catch (SQLException e) {
             System.out.println("Connection failed");
             e.printStackTrace();
+        } finally {
+            close(connection);
         }
 
     }
@@ -125,6 +128,11 @@ public class ManagerDaoImplV2 implements ManagerDao {
 
     @Override
     public List<Manager> findAll() {
+        return null;
+    }
+
+    @Override
+    public List<Manager> saveAll(List<Manager> managers) {
         return null;
     }
 }

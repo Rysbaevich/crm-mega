@@ -1,9 +1,7 @@
-import dao.ManagerDao;
+import dao.*;
 import util.Log;
 
 public class Main {
-
-//    private static final Logger log = Logger.getLogger(Main.class.getName());
 
     public static void main(String[] args) {
         try {
@@ -11,12 +9,19 @@ public class Main {
             Class.forName("org.postgresql.Driver");
             Log.info("Driver loaded", Main.class.getName(), Class.class.getName());
         } catch (ClassNotFoundException e) {
-            Log.error("Loading failed", Main.class.getName(), Class.class.getName());
+            Log.error("Driver loading failed", Main.class.getName(), Class.class.getName());
             e.printStackTrace();
         }
 
         ManagerDao managerDao = ManagerDao.INSTANCE;
-        /*Manager manager = new Manager();
+        CourseFormatDao courseFormatDao = CourseFormatDao.INSTANCE;
+        CourseDao courseDao = CourseDao.INSTANCE;
+        MentorDao mentorDao = MentorDao.INSTANCE;
+        AddressDao addressDao = AddressDao.INSTANCE;
+        GroupDao groupDao = GroupDao.INSTANCE;
+        StudentDao studentDao = StudentDao.INSTANCE;
+
+/*      Manager manager = new Manager();
         Scanner scanner = new Scanner(System.in);
         System.out.println("Name: ");
         manager.setName(scanner.nextLine());
@@ -33,6 +38,6 @@ public class Main {
         System.out.println("Salary: ");
         manager.setSalary(scanner.nextDouble());
 */
-        System.out.println(managerDao.findById(3L));
+//        System.out.println(managerDao.findById(3L));
     }
 }

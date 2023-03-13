@@ -7,9 +7,10 @@ import java.util.List;
 
 public interface CrudDao<Model> {
     Model save(Model model);
-
     Model findById(Long id);
     List<Model> findAll();
+    List<Model> saveAll(List<Model> models);
+
 
     default Connection getConnection() throws SQLException {
         final String URL = "jdbc:postgresql://localhost:5432/crm_mega";
