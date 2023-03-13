@@ -3,14 +3,21 @@ package dao.impl;
 import dao.CourseFormatDao;
 import model.CourseFormat;
 
+import java.util.List;
+
 public class CourseFormatDaoImplV2 implements CourseFormatDao {
     @Override
-    public void save(CourseFormat courseFormat) {
-
+    public CourseFormat save(CourseFormat courseFormat) {
+        return null;
     }
 
     @Override
-    public CourseFormat[] findAll() {
-        return new CourseFormat[0];
+    public CourseFormat findById(Long id) {
+        return null;
+    }
+
+    @Override
+    public List<CourseFormat> findAll() {
+        return null;
     }
 }

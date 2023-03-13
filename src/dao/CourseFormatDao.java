@@ -1,8 +1,8 @@
 package dao;
 
-import dao.impl.CourseFormatDaoImpl;
+import dao.impl.CourseFormatDaoImplV2;
 import model.CourseFormat;
 
 public interface CourseFormatDao extends CrudDao<CourseFormat> {
-    CourseFormatDao INSTANCE = new CourseFormatDaoImpl();
+    CourseFormatDao INSTANCE = new CourseFormatDaoImplV2();
 }

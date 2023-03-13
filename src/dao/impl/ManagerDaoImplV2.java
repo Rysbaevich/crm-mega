@@ -4,17 +4,15 @@ import dao.ManagerDao;
 import model.Manager;
 
 import java.sql.*;
+import java.util.List;
 
 
 public class ManagerDaoImplV2 implements ManagerDao {
-    private final String URL = "jdbc:postgresql://localhost:5432/crm_mega";
-    private final String USERNAME = "postgres";
-    private final String PASSWORD = "'";
 
     public ManagerDaoImplV2() {
         try {
             System.out.println("Connecting...");
-            Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            Connection connection = getConnection();
             System.out.println("Connection succeed");
 
             String ddlQuery =
@@ -32,28 +30,23 @@ public class ManagerDaoImplV2 implements ManagerDao {
             preparedStatement.execute();
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println("Connection failed");
+            e.printStackTrace();
         }
 
     }
 
     @Override
-    public void save(Manager manager) {
+    public Manager save(Manager manager) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-
-
+        ResultSet resultSet = null;
+        Manager managerResult = null;
         try {
             System.out.println("Connecting...");
-            connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            connection = getConnection();
             System.out.println("Connection succeed");
-//            Statement statement = connection.createStatement();
 
-   /*         String query = "INSERT INTO tb_manager(name, surname, phone, date_created, salary, email) " +
-                    " VALUES ('" + manager.getName() + "', '" + manager.getSurname() + "', " +
-                    "'" + manager.getPhone() + "', '"+manager.getDateCreated()+"', '"+manager.getSalary()+"', " +
-                    "'"+manager.getEmail()+"')";
-*/
             String query = "INSERT INTO tb_manager(name, surname, phone, date_created, salary, email) " +
                     " VALUES (?, ?, ?, ?, ?, ?)";
             preparedStatement = connection.prepareStatement(query);
@@ -64,33 +57,74 @@ public class ManagerDaoImplV2 implements ManagerDao {
             preparedStatement.setTimestamp(4, Timestamp.valueOf(manager.getDateCreated()));
             preparedStatement.setDouble(5, manager.getSalary());
             preparedStatement.setString(6, manager.getEmail());
-
             preparedStatement.execute();
 
+            String querySelect =
+                    " SELECT * FROM tb_manager" +
+                    " ORDER BY id DESC LIMIT 1;";
+            preparedStatement = connection.prepareStatement(querySelect);
 
-            /*String query = String.format(
-                    "INSERT INTO tb_manager " +
-                    "(name, surname, phone, salary, date_created, email) " +
-                    "VALUES ('%s', '%s', '%s', %f, '%s', '%s');",
-                    manager.getName(),
-                    manager.getSurname(),
-                    manager.getPhone(),
-                    manager.getSalary(),
-                    manager.getDateCreated(),
-                    manager.getEmail());*/
-//            statement.execute(query);
+            managerResult = new Manager();
+
+            resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            managerResult.setId(resultSet.getLong("id"));
+            managerResult.setName(resultSet.getString("name"));
+            managerResult.setSurname(resultSet.getString("surname"));
+            managerResult.setPhone(resultSet.getString("phone"));
+            managerResult.setEmail(resultSet.getString("email"));
+            managerResult.setSalary(resultSet.getDouble("salary"));
+            managerResult.setDateCreated(resultSet.getTimestamp("date_created").toLocalDateTime());
 
         } catch (SQLException e) {
             System.err.println("SQL exception");
             e.printStackTrace();
         } finally {
+            close(resultSet);
             close(preparedStatement);
             close(connection);
         }
+        return managerResult;
     }
 
     @Override
-    public Manager[] findAll() {
-        return new Manager[0];
+    public Manager findById(Long id) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        Manager manager = new Manager();
+
+        try {
+            connection = getConnection();
+
+            String query = "SELECT * FROM tb_manager WHERE id = ?;";
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setLong(1, id);
+            resultSet = preparedStatement.executeQuery();
+
+            resultSet.next();
+
+            manager.setId(resultSet.getLong("id"));
+            manager.setName(resultSet.getString("name"));
+            manager.setSurname(resultSet.getString("surname"));
+            manager.setPhone(resultSet.getString("phone"));
+            manager.setEmail(resultSet.getString("email"));
+            manager.setSalary(resultSet.getDouble("salary"));
+            manager.setDateCreated(resultSet.getTimestamp("date_created").toLocalDateTime());
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(resultSet);
+            close(preparedStatement);
+            close(connection);
+        }
+
+        return manager;
+    }
+
+    @Override
+    public List<Manager> findAll() {
+        return null;
     }
 }
