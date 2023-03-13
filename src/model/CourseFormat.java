@@ -1,34 +1,18 @@
 package model;
 
-import enums.Format;
-import enums.FormatOldVersion;
-
 public class CourseFormat extends BaseEntity {
-    private Format format;
+    private String formatName;
     private int durationInWeek;
     private boolean isOnline;
     private int lessonDuration;
     private int lessonCountPerWeek;
 
-    @Override
-    public String toString() {
-        return "CourseFormat{" +
-                "id=" + id +
-                ", format=" + format.getA() +
-                ", durationInWeek=" + durationInWeek +
-                ", isOnline=" + isOnline +
-                ", lessonDuration=" + lessonDuration +
-                ", lessonCountPerWeek=" + lessonCountPerWeek +
-                ", dateCreated=" + dateCreated +
-                '}';
+    public String getFormat() {
+        return formatName;
     }
 
-    public Format getFormat() {
-        return format;
-    }
-
-    public void setFormat(Format format) {
-        this.format = format;
+    public void setFormat(String formatName) {
+        this.formatName = formatName;
     }
 
     public int getDurationInWeek() {
