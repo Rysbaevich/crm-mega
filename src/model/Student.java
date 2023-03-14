@@ -7,6 +7,20 @@ public class Student extends User {
     private LocalDate dob;
     private List<Group> groups;
 
+    @Override
+    public String toString() {
+        return "Student{" +
+                "dob=" + dob +
+                ", groups=" + groups +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", id=" + id +
+                ", dateCreated=" + dateCreated +
+                '}';
+    }
+
     public List<Group> getGroups() {
         return groups;
     }

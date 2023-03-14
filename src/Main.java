@@ -1,5 +1,12 @@
 import dao.*;
+import model.Group;
+import model.Student;
 import util.Log;
+
+import java.time.LocalDate;
+import java.time.Month;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
 
@@ -21,6 +28,19 @@ public class Main {
         GroupDao groupDao = GroupDao.INSTANCE;
         StudentDao studentDao = StudentDao.INSTANCE;
 
+        Student student = new Student();
+        student.setName("Aigerim");
+        student.setSurname("Bekova");
+        student.setEmail("aigerim@mail.ru");
+        student.setPhone("0555555556");
+        student.setDob(LocalDate.of(2005, Month.APRIL, 1));
+        Group group = new Group();
+        group.setId(1);
+        List<Group> groups = new ArrayList<>();
+        groups.add(group);
+        student.setGroups(groups);
+
+        System.out.println(studentDao.findById(2L));
 /*      Manager manager = new Manager();
         Scanner scanner = new Scanner(System.in);
         System.out.println("Name: ");

@@ -19,6 +19,7 @@ public class CourseDaoImplV2 implements CourseDao {
                             "( " +
                             "    id               serial primary key, " +
                             "    name             varchar(30) not null, " +
+                            "    price            numeric check (price > 0), " +
                             "    course_format_id bigint      not null " +
                             "        constraint fk_course " +
                             "            references tb_course_format, " +
