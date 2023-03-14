@@ -11,6 +11,7 @@ public class Course extends BaseEntity {
 
     public void setName(String name) {
         this.name = name;
+
     }
 
     public double getPrice() {

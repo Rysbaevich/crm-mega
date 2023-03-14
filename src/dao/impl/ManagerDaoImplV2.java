@@ -9,6 +9,22 @@ import java.util.List;
 
 public class ManagerDaoImplV2 implements ManagerDao {
 
+//    "CREATE TABLE IF NOT EXISTS tb_group " +
+//            "( " +
+//            "    id           serial primary key, " +
+//            "    name         varchar(50) not null, " +
+//            "    room         varchar(50) not null, " +
+//            "    start_time   time, " +
+//            "    mentor_id    bigint " +
+//            "        constraint fk_mentor_id references tb_mentor (id), " +
+//            "    course_id    bigint " +
+//            "        constraint fk_group_id references tb_course (id), " +
+//            "    date_created timestamp   not null " +
+//            ");" +
+
+
+
+
     public ManagerDaoImplV2() {
         Connection connection = null;
         try {
@@ -64,7 +80,7 @@ public class ManagerDaoImplV2 implements ManagerDao {
 
             String querySelect =
                     " SELECT * FROM tb_manager" +
-                    " ORDER BY id DESC LIMIT 1;";
+                            " ORDER BY id DESC LIMIT 1;";
             preparedStatement = connection.prepareStatement(querySelect);
 
             managerResult = new Manager();

@@ -3,8 +3,7 @@ import model.Group;
 import model.Student;
 import util.Log;
 
-import java.time.LocalDate;
-import java.time.Month;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,19 +27,40 @@ public class Main {
         GroupDao groupDao = GroupDao.INSTANCE;
         StudentDao studentDao = StudentDao.INSTANCE;
 
-        Student student = new Student();
-        student.setName("Aigerim");
-        student.setSurname("Bekova");
-        student.setEmail("aigerim@mail.ru");
-        student.setPhone("0555555556");
-        student.setDob(LocalDate.of(2005, Month.APRIL, 1));
-        Group group = new Group();
-        group.setId(1);
-        List<Group> groups = new ArrayList<>();
-        groups.add(group);
-        student.setGroups(groups);
 
-        System.out.println(studentDao.findById(2L));
+//
+//        Student student = new Student();
+//        student.setName("Kim");
+//        student.setSurname("He");
+//        student.setEmail("kimm@mail.ru");
+//        student.setPhone("057775556");
+//        student.setDob(LocalDate.of(1986, Month.MAY, 1));
+//        Group group = new Group();
+//        group.setId(1);
+//        List<Group> groups = new ArrayList<>();
+//        groups.add(group);
+//        student.setGroups(groups);
+//
+//        System.out.println(studentDao.findById(1L));
+//
+//        System.out.println(studentDao.save(student));
+//
+
+        Group group = new Group();
+        group.setName("Java 20012023");
+        group.setRoom("8");
+        group.setStartTime(LocalTime.of(8,30,01));
+        Student student = new Student();
+        student.setId(2);
+        List<Student> students = new ArrayList<>();
+        students.add(student);
+        group.setStudents(students);
+
+        System.out.println(groupDao.save(group));
+
+
+
+
 /*      Manager manager = new Manager();
         Scanner scanner = new Scanner(System.in);
         System.out.println("Name: ");
