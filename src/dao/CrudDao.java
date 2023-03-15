@@ -15,7 +15,7 @@ public interface CrudDao<Model> {
     default Connection getConnection() throws SQLException {
         final String URL = "jdbc:postgresql://localhost:5432/crm_mega";
         final String USERNAME = "postgres";
-        final String PASSWORD = "'";
+        final String PASSWORD = "6909";
 
         return DriverManager.getConnection(URL, USERNAME, PASSWORD);
     }

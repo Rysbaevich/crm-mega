@@ -1,5 +1,8 @@
 package model;
 
+import lombok.ToString;
+
+@ToString
 public class Course extends BaseEntity {
     private String name;
     private double price;
@@ -29,13 +32,4 @@ public class Course extends BaseEntity {
         this.courseFormat = courseFormat;
     }
 
-    @Override
-    public String toString() {
-        return "Course{" +
-                super.toString() +
-                "name='" + name + '\'' +
-                ", price=" + price +
-                ", courseFormat=" + courseFormat +
-                '}';
-    }
 }

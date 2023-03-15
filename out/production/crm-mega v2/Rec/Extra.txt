@@ -1,0 +1,20 @@
+String getQuery = "SELECT * FROM tb_course join tb_course_format tcf " +
+                                "on tcf.id = tb_course.course_format_id ";
+
+            preparedStatement = connection.prepareStatement(getQuery);
+            resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+
+            courseFormat.setId(resultSet.getLong(1));
+            courseFormat.setFormat(resultSet.getString(2));
+            courseFormat.setDurationInWeek(resultSet.getInt(3));
+            courseFormat.setOnline(resultSet.getBoolean(4));
+            courseFormat.setLessonDuration(resultSet.getInt(5));
+            courseFormat.setLessonCountPerWeek(resultSet.getInt(6));
+            courseFormat.setDateCreated(resultSet.getTimestamp(7).toLocalDateTime());
+
+            course1.setId(resultSet.getLong(1));
+            course1.setName(resultSet.getString(2));
+            course1.setPrice(resultSet.getDouble(3));
+            course1.setCourseFormat(courseFormat);
+            course1.setDateCreated(resultSet.getTimestamp(4).toLocalDateTime());

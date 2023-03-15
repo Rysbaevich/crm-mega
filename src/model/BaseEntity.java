@@ -1,7 +1,9 @@
 package model;
 
-import java.time.LocalDateTime;
+import lombok.ToString;
 
+import java.time.LocalDateTime;
+@ToString
 public abstract class BaseEntity {
     protected long id;
     protected LocalDateTime dateCreated = LocalDateTime.now();

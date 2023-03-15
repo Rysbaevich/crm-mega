@@ -1,5 +1,9 @@
 package model;
 
+import lombok.ToString;
+
+@ToString
+
 public class CourseFormat extends BaseEntity {
     private String formatName;
     private int durationInWeek;

@@ -1,4 +1,6 @@
 import dao.*;
+import model.Course;
+import model.CourseFormat;
 import model.Group;
 import model.Student;
 import util.Log;
@@ -28,19 +30,32 @@ public class Main {
         GroupDao groupDao = GroupDao.INSTANCE;
         StudentDao studentDao = StudentDao.INSTANCE;
 
-        Student student = new Student();
-        student.setName("Aigerim");
-        student.setSurname("Bekova");
-        student.setEmail("aigerim@mail.ru");
-        student.setPhone("0555555556");
-        student.setDob(LocalDate.of(2005, Month.APRIL, 1));
-        Group group = new Group();
-        group.setId(1);
-        List<Group> groups = new ArrayList<>();
-        groups.add(group);
-        student.setGroups(groups);
+        Course course = new Course();
 
-        System.out.println(studentDao.findById(2L));
+        course.setName("java");
+        course.setPrice(15000);
+        CourseFormat courseFormat = courseFormatDao.findById(2L);
+        course.setCourseFormat(courseFormat);
+//        courseDao.save(course);
+
+        List<Course> courses = new ArrayList<>();
+//        System.out.println(courseDao.findById(17L));
+        for (Course course1 : courseDao.findAll()) {
+            System.out.println(course1);
+
+//        Student student = new Student();
+//        student.setName("Aigerim");
+//        student.setSurname("Bekova");
+//        student.setEmail("aigerim@mail.ru");
+//        student.setPhone("0555555556");
+//        student.setDob(LocalDate.of(2005, Month.APRIL, 1));
+//        Group group = new Group();
+//        group.setId(1);
+//        List<Group> groups = new ArrayList<>();
+//        groups.add(group);
+//        student.setGroups(groups);
+//
+//        System.out.println(studentDao.findById(2L));
 /*      Manager manager = new Manager();
         Scanner scanner = new Scanner(System.in);
         System.out.println("Name: ");
@@ -59,5 +74,6 @@ public class Main {
         manager.setSalary(scanner.nextDouble());
 */
 //        System.out.println(managerDao.findById(3L));
+        }
     }
 }
