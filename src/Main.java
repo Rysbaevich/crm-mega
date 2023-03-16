@@ -30,50 +30,24 @@ public class Main {
         GroupDao groupDao = GroupDao.INSTANCE;
         StudentDao studentDao = StudentDao.INSTANCE;
 
+        List<Course> courses = new ArrayList<>();
         Course course = new Course();
+        Course course1 = new Course();
 
         course.setName("java");
         course.setPrice(15000);
         CourseFormat courseFormat = courseFormatDao.findById(2L);
         course.setCourseFormat(courseFormat);
-//        courseDao.save(course);
 
-        List<Course> courses = new ArrayList<>();
-//        System.out.println(courseDao.findById(17L));
-        for (Course course1 : courseDao.findAll()) {
-            System.out.println(course1);
+        course1.setName("flutter");
+        course1.setPrice(15000);
+        CourseFormat courseFormat1 = courseFormatDao.findById(1L);
+        course1.setCourseFormat(courseFormat1);
 
-//        Student student = new Student();
-//        student.setName("Aigerim");
-//        student.setSurname("Bekova");
-//        student.setEmail("aigerim@mail.ru");
-//        student.setPhone("0555555556");
-//        student.setDob(LocalDate.of(2005, Month.APRIL, 1));
-//        Group group = new Group();
-//        group.setId(1);
-//        List<Group> groups = new ArrayList<>();
-//        groups.add(group);
-//        student.setGroups(groups);
-//
-//        System.out.println(studentDao.findById(2L));
-/*      Manager manager = new Manager();
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Name: ");
-        manager.setName(scanner.nextLine());
+        courses.add(course);
+        courses.add(course1);
+//        courseDao.saveAll(courses);
+        System.out.println(courseDao.findAll());
 
-        System.out.println("Surname: ");
-        manager.setSurname(scanner.nextLine());
-
-        System.out.println("Phone: ");
-        manager.setPhone(scanner.nextLine());
-
-        System.out.println("Email: ");
-        manager.setEmail(scanner.nextLine());
-
-        System.out.println("Salary: ");
-        manager.setSalary(scanner.nextDouble());
-*/
-//        System.out.println(managerDao.findById(3L));
-        }
     }
 }

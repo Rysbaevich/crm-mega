@@ -99,7 +99,7 @@ public class CourseDaoImplV2 implements CourseDao {
 
             courseFormat = new CourseFormat();
             courseFormat.setId(resultSet.getLong("cf_id"));
-            courseFormat.setFormat(resultSet.getString("cf_name"));
+            courseFormat.setFormatName(resultSet.getString("cf_name"));
             courseFormat.setDurationInWeek(resultSet.getInt("duration_in_week"));
             courseFormat.setOnline(resultSet.getBoolean("is_online"));
             courseFormat.setLessonDuration(resultSet.getInt("lesson_duration"));
@@ -143,7 +143,7 @@ public class CourseDaoImplV2 implements CourseDao {
             while (resultSet.next()) {
                 courseFormat = new CourseFormat();
                 courseFormat.setId(resultSet.getLong("cf_id"));
-                courseFormat.setFormat(resultSet.getString("cf_name"));
+                courseFormat.setFormatName(resultSet.getString("cf_name"));
                 courseFormat.setDurationInWeek(resultSet.getInt("duration_in_week"));
                 courseFormat.setOnline(resultSet.getBoolean("is_online"));
                 courseFormat.setLessonDuration(resultSet.getInt("lesson_duration"));
@@ -171,6 +171,27 @@ public class CourseDaoImplV2 implements CourseDao {
 
     @Override
     public List<Course> saveAll(List<Course> courses) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        try {
+            connection = getConnection();
+            String query = "INSERT INTO  tb_course (name, price, course_format_id, date_created)" +
+                    "values (?,?,?,?)";
+            connection.setAutoCommit(true);
+            for (Course course : courses){
+                preparedStatement = connection.prepareStatement(query);
+                preparedStatement.setString(1, course.getName());
+                preparedStatement.setDouble(2,course.getPrice());
+                preparedStatement.setLong(3,course.getCourseFormat().getId());
+                preparedStatement.setTimestamp(4, Timestamp.valueOf(course.getDateCreated()));
+                preparedStatement.execute();
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            close(preparedStatement);
+            close(connection);
+        }
         return null;
     }
 }

@@ -46,7 +46,7 @@ public class CourseFormatDaoImplV2 implements CourseFormatDao {
                     "values (?,?,?,?,?,?)";
             preparedStatement = connection.prepareStatement(query);
 
-            preparedStatement.setString(1,courseFormat.getFormat());
+            preparedStatement.setString(1,courseFormat.getFormatName());
             preparedStatement.setInt(2,courseFormat.getDurationInWeek());
             preparedStatement.setBoolean(3,courseFormat.isOnline());
             preparedStatement.setInt(4,courseFormat.getLessonDuration());
@@ -79,7 +79,7 @@ public class CourseFormatDaoImplV2 implements CourseFormatDao {
 
             courseFormat = new CourseFormat();
             courseFormat.setId(resultSet.getLong(1));
-            courseFormat.setFormat(resultSet.getString(2));
+            courseFormat.setFormatName(resultSet.getString(2));
             courseFormat.setDurationInWeek(resultSet.getInt(3));
             courseFormat.setOnline(resultSet.getBoolean(4));
             courseFormat.setLessonDuration(resultSet.getInt(5));
