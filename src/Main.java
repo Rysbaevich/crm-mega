@@ -1,10 +1,8 @@
 import dao.*;
-import model.Group;
-import model.Student;
+import model.Manager;
+import model.Mentor;
 import util.Log;
 
-import java.time.LocalDate;
-import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,19 +26,41 @@ public class Main {
         GroupDao groupDao = GroupDao.INSTANCE;
         StudentDao studentDao = StudentDao.INSTANCE;
 
-        Student student = new Student();
-        student.setName("Aigerim");
-        student.setSurname("Bekova");
-        student.setEmail("aigerim@mail.ru");
-        student.setPhone("0555555556");
-        student.setDob(LocalDate.of(2005, Month.APRIL, 1));
-        Group group = new Group();
-        group.setId(1);
-        List<Group> groups = new ArrayList<>();
-        groups.add(group);
-        student.setGroups(groups);
+        List<Manager> managers = new ArrayList<>();
+        Manager manager = new Manager();
+        manager.setName("Aigerim");
+        manager.setSurname("Bekova");
+        manager.setEmail("aigerim@mail.ru");
+        manager.setPhone("0555555556");
+        manager.setSalary(20_000);
 
-        System.out.println(studentDao.findById(2L));
+        Manager manager1 = new Manager();
+        manager1.setName("Aidai");
+        manager1.setSurname("Bekova");
+        manager1.setEmail("aidai@mail.ru");
+        manager1.setPhone("0553555556");
+        manager1.setSalary(20_000);
+
+        Manager manager2 = new Manager();
+        manager2.setName("Aizat");
+        manager2.setSurname("Bekova");
+        manager2.setEmail("aizat@mail.ru");
+        manager2.setPhone("0554555556");
+        manager2.setSalary(20_000);
+
+        Manager manager3 = Manager.ManagerBuilder
+                .builder()
+                .name("Aijan")
+                .surname("Aibekova")
+                .build();
+
+        Mentor mentor = Mentor.builder()
+                .build();
+        managers.add(manager);
+        managers.add(manager1);
+        managers.add(manager2);
+        System.out.println(managers);
+        System.out.println(managerDao.saveAll(managers));
 /*      Manager manager = new Manager();
         Scanner scanner = new Scanner(System.in);
         System.out.println("Name: ");

@@ -1,5 +1,8 @@
 package model;
 
+import lombok.Builder;
+
+@Builder
 public class Mentor extends User {
     private double experience;
     private double salaryForLesson;

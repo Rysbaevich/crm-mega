@@ -133,6 +133,39 @@ public class ManagerDaoImplV2 implements ManagerDao {
 
     @Override
     public List<Manager> saveAll(List<Manager> managers) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        try {
+            System.out.println("Connecting...");
+            connection = getConnection();
+            System.out.println("Connection succeed");
+
+            String query = "INSERT INTO tb_manager(name, surname, phone, date_created, salary, email) " +
+                    " VALUES (?, ?, ?, ?, ?, ?)";
+
+            connection.setAutoCommit(true);
+
+            for (Manager manager : managers) {
+                preparedStatement = connection.prepareStatement(query);
+                preparedStatement.setString(1, manager.getName());
+                preparedStatement.setString(2, manager.getSurname());
+                preparedStatement.setString(3, manager.getPhone());
+                preparedStatement.setTimestamp(4, Timestamp.valueOf(manager.getDateCreated()));
+                preparedStatement.setDouble(5, manager.getSalary());
+                preparedStatement.setString(6, manager.getEmail());
+                preparedStatement.execute();
+            }
+//            if (preparedStatement != null) {
+//                preparedStatement.executeBatch();
+//            }
+        } catch (SQLException e) {
+            System.err.println("SQL exception");
+            e.printStackTrace();
+        } finally {
+            close(preparedStatement);
+            close(connection);
+        }
+
         return null;
     }
 }
